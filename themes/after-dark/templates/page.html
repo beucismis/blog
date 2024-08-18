@@ -1,0 +1,104 @@
+{% extends "index.html" %}
+{% import "post_macros.html" as post_macros %}
+
+{% block content %}
+    {% block header %}
+        {{ super() }}
+    {% endblock header %}
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="headline">{{ page.title }}</h1>
+        <span class="muted">{{ post_macros::meta(page=page) }}</span>
+    </header>
+    <div itemprop="articleBody">
+      {{ page.content | safe }}
+    </div>
+
+    {% block page_footer %}
+        <footer>
+            <hr>
+            <p>
+                {% if page.extra.author %}
+                    Published by {{ page.extra.author }}
+                {% elif config.extra.author %}
+                    Published by {{ config.extra.author }}
+                {% endif %}
+                {% if page.taxonomies.categories %}
+                    {% set category = page.taxonomies.categories[0] %}
+                    in <a href="{{ get_taxonomy_url(kind="categories", name=category) | safe }}">{{ category }}</a>
+                {% endif %}
+                {% if page.taxonomies.tags %}
+                    {% if page.taxonomies.categories %}and{% endif %}
+                    tagged
+                    {% for tag in page.taxonomies.tags %}
+                        <a href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}">{{ tag }}</a>
+                        {% if page.taxonomies.tags | length > 1 %}
+                            {% if loop.index != page.taxonomies.tags | length %}
+                                {% if loop.index == page.taxonomies.tags | length - 1 %}
+                                    and
+                                {% else %}
+                                    ,
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </p>
+            {% block extra_footer %}
+            {% endblock extra_footer %}
+            <!--<div style="display: flex; justify-content: space-between; align-items: center">
+              <div>
+                <iframe
+                  src="https://github.com/sponsors/orhun/button"
+                  title="Sponsor @orhun"
+                  height="35"
+                  width="116"
+                  style="border: 0"
+                ></iframe>
+                <a href="https://www.buymeacoffee.com/orhun" target="_blank"
+                  ><img
+                    src="https://cdn.buymeacoffee.com/buttons/v2/default-white.png"
+                    alt="Buy Me A Coffee"
+                    style="height: 40px !important; width: 150px !important"
+                /></a>
+              </div>
+              <div>
+                <applause-button
+                  style="width: 50px; height: 50px"
+                  url="{{ config.base_url | safe }}{{ page.path }}"
+                  color="white"
+                  multiclap="true"
+                />
+              </div>
+              <div>
+                <div style="width: auto; height: 39px">
+                  <p style="margin: 0; color: #fff; font-style: italic">✨ Sponsored by:</p>
+                </div>
+                <a href="https://terminaltrove.com/" target="_blank"
+                  ><img
+                    src="/sponsors/terminal_trove.png"
+                    alt="Terminal Trove"
+                    style="height: 40px; width: auto"
+                /></a>
+                <a href="https://rawkode.academy/" target="_blank"
+                  ><img
+                    src="/sponsors/rawkode_academy.png"
+                    alt="Rawkode Academy"
+                    style="height: 40px; width: auto"
+                /></a>
+              </div>
+            </div>-->
+            <script src="https://utteranc.es/client.js"
+                    repo="beucismis/blog"
+                    issue-term="url"
+                    label="comments"
+                    theme="github-dark"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </footer>
+    {% endblock page_footer %}
+</article>
+
+{% endblock content %}

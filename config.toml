@@ -1,0 +1,30 @@
+base_url = "https://blog.beucismis.org"
+title = "beucismis's blog"
+#description = "FOSS • Linux • Programming"
+default_language = "en"
+theme = "after-dark"
+compile_sass = false
+minify_html = false
+build_search_index = false
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+taxonomies = [{ name = "categories", feed = true }]
+
+[markdown]
+highlight_code = true
+highlight_theme = "axar"
+
+render_emoji = false
+
+[extra]
+author = "beucismis"
+after_dark_menu = [
+  { name = "Home", url = "$BASE_URL" },
+  { name = "About", url = "$BASE_URL/about" },
+  { name = "Donate", url = "$BASE_URL/donate" },
+  { name = "GitHub", url = "https://github.com/beucismis" },
+  { name = "Source", url = "https://github.com/beucismis/blog" },
+  { name = "Categories", url = "$BASE_URL/categories" },
+  { name = "RSS", url = "$BASE_URL/rss.xml" },
+]
+after_dark_title = "beucismis's blog"
