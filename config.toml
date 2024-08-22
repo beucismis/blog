@@ -13,7 +13,6 @@ taxonomies = [{ name = "categories", feed = true }]
 [markdown]
 highlight_code = true
 highlight_theme = "axar"
-
 render_emoji = false
 
 [extra]
