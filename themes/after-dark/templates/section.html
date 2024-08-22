@@ -8,34 +8,34 @@
 
 <article itemscope itemtype="http://schema.org/BlogPosting">
     <header>
-        <h1 itemprop="headline">{{ page.title }}</h1>
-        <span class="muted">{{ post_macros::meta(page=page) }}</span>
+        <h1 itemprop="headline">{{ section.title }}</h1>
+        <span class="muted">{{ post_macros::meta(page=section) }}</span>
     </header>
     <div itemprop="articleBody">
-      {{ page.content | safe }}
+      {{ section.content | safe }}
     </div>
 
     {% block page_footer %}
         <footer>
             <hr>
             <p>
-                {% if page.extra.author %}
-                    Published by {{ page.extra.author }}
+                {% if section.extra.author %}
+                    Published by {{ section.extra.author }}
                 {% elif config.extra.author %}
                     Published by {{ config.extra.author }}
                 {% endif %}
-                {% if page.taxonomies.categories %}
-                    {% set category = page.taxonomies.categories[0] %}
+                {% if section.taxonomies.categories %}
+                    {% set category = section.taxonomies.categories[0] %}
                     in <a href="{{ get_taxonomy_url(kind="categories", name=category) | safe }}">{{ category }}</a>
                 {% endif %}
-                {% if page.taxonomies.tags %}
-                    {% if page.taxonomies.categories %}and{% endif %}
+                {% if section.taxonomies.tags %}
+                    {% if section.taxonomies.categories %}and{% endif %}
                     tagged
-                    {% for tag in page.taxonomies.tags %}
+                    {% for tag in section.taxonomies.tags %}
                         <a href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}">{{ tag }}</a>
-                        {% if page.taxonomies.tags | length > 1 %}
-                            {% if loop.index != page.taxonomies.tags | length %}
-                                {% if loop.index == page.taxonomies.tags | length - 1 %}
+                        {% if section.taxonomies.tags | length > 1 %}
+                            {% if loop.index != section.taxonomies.tags | length %}
+                                {% if loop.index == section.taxonomies.tags | length - 1 %}
                                     and
                                 {% else %}
                                     ,
