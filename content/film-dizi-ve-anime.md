@@ -1,6 +1,6 @@
 +++
 title = "Film, Dizi ve Anime"
-date = 2024-29-08
+date = 2024-08-29
 
 [taxonomies]
 categories = ["movie", "tv-serie", "anime"]
